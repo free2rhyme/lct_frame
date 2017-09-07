@@ -109,7 +109,7 @@ LCT_ERR_CODE CLctSocketManager::select()
 LCT_ERR_CODE CLctSocketManager::addSocket(const CLctSocketShp& socketShp)
 {
     LOG_DEBUG_MARK();
-    return addSocket(socketShp, EPOLLIN | EPOLLET);
+    return addSocket(socketShp, EPOLLET | EPOLLIN | EPOLLHUP | EPOLLRDHUP | EPOLLERR);
 }
 
 LCT_ERR_CODE CLctSocketManager::addSocket(const CLctSocketShp& socketShp, const uint32_t eventType)
@@ -225,11 +225,28 @@ LCT_ERR_CODE CLctSocketManager::processSocketEvent(const int32_t socketFd, const
         return errCode;
     }
 
+    if ((epollEvents & EPOLLERR) == EPOLLERR) {
+        LOG_INFOR << "EPOLLERR event for socket(" << socketFd << ") triggered";
+        return socketShp->stopService();
+    }
+
+    if ((epollEvents & EPOLLHUP) == EPOLLHUP) {
+        LOG_INFOR << "EPOLLHUP event for socket(" << socketFd << ") triggered";
+        return socketShp->stopService();
+    }
+
+    if ((epollEvents & EPOLLRDHUP) == EPOLLRDHUP) {
+        LOG_INFOR << "EPOLLRDHUP event for socket(" << socketFd << ") triggered";
+        return socketShp->stopService();
+    }
+
     if ((epollEvents & EPOLLIN) == EPOLLIN) {
+        LOG_INFOR << "EPOLLIN event(" << socketFd << ") triggered in socket manager";
         return socketShp->doProcessRead();
     }
 
     if ((epollEvents & EPOLLOUT) == EPOLLOUT) {
+        LOG_INFOR << "EPOLLOUT event(" << socketFd << ") triggered in socket manager";
         return socketShp->doProcessWrite();
     }
 

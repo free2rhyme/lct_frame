@@ -14,7 +14,7 @@
 class CLctLogConfigMgr final:public CLctSingleton<CLctLogConfigMgr>
 {
 public:
-    LCT_ERR_CODE init(const std::string& configFile);
+    LCT_ERR_CODE init(const int64_t logLevelVal);
 
     bool traceLevel() const
     {

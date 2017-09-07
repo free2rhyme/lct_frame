@@ -67,7 +67,7 @@ LCT_ERR_CODE CLctNetConnector::startConnecting()
         return errCode;
     }
 
-    errCode = LCT_SOCKET_MGR->addSocket(m_socketShp, EPOLLIN | EPOLLOUT | EPOLLET);
+    errCode = LCT_SOCKET_MGR->addSocket(m_socketShp, EPOLLIN | EPOLLOUT | EPOLLET | EPOLLHUP | EPOLLRDHUP | EPOLLERR);
     if (LCT_SUCCESS != errCode) {
         LOG_ERROR<< "Failed to add a client socket into socket manager " << ErrCodeFormat(errCode);
         return errCode;

@@ -17,25 +17,12 @@
 #include "lct_log_sink_pool.h"
 #include "lct_log_stream.h"
 
-typedef CLctLogSinkPool<
-            CRotateFileSinkShp,
-            CDailyFileSinkShp,
-            CDailyRotateFileSinkShp,
-            CRemoteSinkShp>           CLctLogSinkPoolType;
-
-typedef CLctLogFormatterPool<
-            CLCTLogFormatterDate,
-            CLCTLogFormatterTime,
-            CLCTLogFormatterMicrosecond,
-            CLCTLogFormatterLogLevel,
-            CLCTLogFormatterThread,
-            CLCTLogFormatterLocation> CLctLogFormatterPoolType;
-
-struct CLctLog
-{
-    bool operator == (CLctLogStream&) const;
-};
-
+static constexpr int64_t LCT_LOG_LEVEL_TRACE_2_CRITIC   = 0x3f;
+static constexpr int64_t LCT_LOG_LEVEL_DEBUG_2_CRITIC   = 0x1f;
+static constexpr int64_t LCT_LOG_LEVEL_INFOR_2_CRITIC   = 0x0f;
+static constexpr int64_t LCT_LOG_LEVEL_WARNG_2_CRITIC   = 0x07;
+static constexpr int64_t LCT_LOG_LEVEL_ERROR_2_CRITIC   = 0x03;
+static constexpr int64_t LCT_LOG_LEVEL_ONLY_CRITIC      = 0x01;
 
 static constexpr int32_t LOG_ROTATE_FILE_MAX_SIZE    = 1024 * 1024 * 10;
 static constexpr int32_t LOG_ROTATE_FILE_MAX_COUNT   = 60;
@@ -44,12 +31,11 @@ class CLctLogger final: public CLctSingleton<CLctLogger>
 {
 public:
     bool isLogged(const ELogLevel) const;
-
-    LCT_ERR_CODE init(const std::string& logLocalDir, const int64_t rotateMaxFileSize = LOG_ROTATE_FILE_MAX_SIZE,
+    
+    LCT_ERR_CODE init(const std::string& logLocalDir, 
+        const int64_t logLevelVal = LCT_LOG_LEVEL_TRACE_2_CRITIC, 
+        const int64_t rotateMaxFileSize = LOG_ROTATE_FILE_MAX_SIZE, 
         const int64_t rotateMaxFileCount = LOG_ROTATE_FILE_MAX_COUNT);
-
-    LCT_ERR_CODE init(const std::string& logLocalDir, const std::string& configFile, const int64_t rotateMaxFileSize = LOG_ROTATE_FILE_MAX_SIZE,
-            const int64_t rotateMaxFileCount = LOG_ROTATE_FILE_MAX_COUNT);
 
     LCT_ERR_CODE close();
 
@@ -69,6 +55,20 @@ private:
     ~CLctLogger();
 
 private:
+    typedef CLctLogSinkPool<
+                CRotateFileSinkShp,
+                CDailyFileSinkShp,
+                CDailyRotateFileSinkShp,
+                CRemoteSinkShp>           CLctLogSinkPoolType;
+
+    typedef CLctLogFormatterPool<
+                CLCTLogFormatterDate,
+                CLCTLogFormatterTime,
+                CLCTLogFormatterMicrosecond,
+                CLCTLogFormatterLogLevel,
+                CLCTLogFormatterThread,
+                CLCTLogFormatterLocation> CLctLogFormatterPoolType;
+
     bool                        m_isInitiated = false;
     CLctLogFormatterPoolType    m_formatterPool;
     CLctLogSinkPoolType         m_sinkPool;
@@ -76,6 +76,11 @@ private:
     typedef std::map<ELogLevel, std::string> CLogLevelContainer;
     CLogLevelContainer          m_loglevels;
     std::ostream&               m_defaultStream = std::cout;
+};
+
+struct CLctLog
+{
+    bool operator == (CLctLogStream&) const;
 };
 
 #define LCT_LOG_MGR CLctLogger::instance()

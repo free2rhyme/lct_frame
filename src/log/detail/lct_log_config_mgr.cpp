@@ -10,24 +10,23 @@
 #include "lct_properties.h"
 #include "lct_log_config_mgr.h"
 
-LCT_ERR_CODE CLctLogConfigMgr::init(const std::string& configFile)
-{
-    CLctProperties properties(configFile);
-    LCT_ERR_CODE errCode = properties.parse();
-    if(LCT_SUCCESS != errCode){
-        std::cout << "Failed to parse Lct Log properties file(" << configFile
-                << ") due to error(" << ErrCodeFormat(errCode) << ")" << std::endl;
-        return errCode;
-    } else {
-        std::cout << "Successful to load Lct Log properties file" << std::endl;
-    }
+static constexpr int64_t IVA_LOG_LEVEL_TRACE = 0x20;
+static constexpr int64_t IVA_LOG_LEVEL_DEBUG = 0x10;
+static constexpr int64_t IVA_LOG_LEVEL_INFOR = 0x08;
+static constexpr int64_t IVA_LOG_LEVEL_WARNG = 0x04;
+static constexpr int64_t IVA_LOG_LEVEL_ERROR = 0x02;
+static constexpr int64_t IVA_LOG_LEVEL_CRITC = 0x01;
 
-    m_traceLevel  = properties.getBool("LctLog.LevelEnable.Trace", true);
-    m_debugLevel  = properties.getBool("LctLog.LevelEnable.Debug", true);
-    m_inforLevel  = properties.getBool("LctLog.LevelEnable.Infor", true);
-    m_warngLevel  = properties.getBool("LctLog.LevelEnable.Warng", true);
-    m_errorLevel  = properties.getBool("LctLog.LevelEnable.Error", true);
-    m_critcLevel  = properties.getBool("LctLog.LevelEnable.Critc", true);
+LCT_ERR_CODE CLctLogConfigMgr::init(const int64_t logLevelVal)
+{
+    std::cout << "Configed logLevel value(" << logLevelVal << ")" << std::endl;
+
+    m_traceLevel  = IVA_LOG_LEVEL_TRACE & logLevelVal;
+    m_debugLevel  = IVA_LOG_LEVEL_DEBUG & logLevelVal;
+    m_inforLevel  = IVA_LOG_LEVEL_INFOR & logLevelVal;
+    m_warngLevel  = IVA_LOG_LEVEL_WARNG & logLevelVal;
+    m_errorLevel  = IVA_LOG_LEVEL_ERROR & logLevelVal;
+    m_critcLevel  = IVA_LOG_LEVEL_CRITC & logLevelVal;
   
     return LCT_SUCCESS;
 }

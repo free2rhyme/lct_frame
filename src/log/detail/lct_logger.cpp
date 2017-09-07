@@ -41,10 +41,17 @@ CLctLogger::~CLctLogger()
 static constexpr int32_t LOG_ROTATE_FILE_DAILY_HOUR = 0;
 static constexpr int32_t LOG_ROTATE_FILE_DAILY_MINUTE = 0;
 
-LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir, const int64_t rotateMaxFileSize,
+LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir, 
+      const int64_t logLevelVal, 
+      const int64_t rotateMaxFileSize,
       const int64_t rotateMaxFileCount)
 {
    LCT_ERR_CODE errCode = LCT_SUCCESS;
+
+   errCode = LCT_LOG_CONFIG_MGR->init(logLevelVal);
+   if (LCT_SUCCESS != errCode) {
+      return errCode;
+   }
 
    errCode = initLogLevel();
    if (LCT_SUCCESS != errCode) {
@@ -70,19 +77,6 @@ LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir, const int64_t rota
    m_isInitiated = true;
 
    return errCode;
-}
-
-LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir, const std::string& configFile,
-        const int64_t rotateMaxFileSize, const int64_t rotateMaxFileCount)
-{
-   LCT_ERR_CODE errCode = LCT_SUCCESS;
-
-   errCode = LCT_LOG_CONFIG_MGR->init(configFile);
-   if (LCT_SUCCESS != errCode) {
-      return errCode;
-   }
-
-   return init(logLocalDir, rotateMaxFileSize, rotateMaxFileCount);
 }
 
 LCT_ERR_CODE CLctLogger::initSinks(const std::string& logLocalDir, const int64_t rotateMaxFileSize,
