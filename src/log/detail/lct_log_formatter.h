@@ -1,10 +1,10 @@
 /**********************************************************************
- * @copyright    Copyright (C), 2017
- * @file         lct_log_formatter.h
- * @version      1.0
- * @date         Jun 8, 2017 6:56:49 PM
- * @author       wlc2rhyme@gmail.com
- * @brief        TODO
+ * @copyright   Copyright (C), 2017
+ * @file        lct_log_formatter.h
+ * @version     1.0
+ * @date        Jun 8, 2017 6:56:49 PM
+ * @author      wlc2rhyme@gmail.com
+ * @brief       TODO
  *********************************************************************/
 #ifndef SRC_LOG_LCT_LOG_FORMATTER_H_
 #define SRC_LOG_LCT_LOG_FORMATTER_H_
@@ -15,104 +15,104 @@ template <typename CFormatType, typename CLogStream>
 class CLctLogFormatter
 {
 public:
-    CLctLogFormatter()
-    {
-    }
+   CLctLogFormatter()
+   {
+   }
 
-    virtual ~CLctLogFormatter()
-    {
-    }
+   virtual ~CLctLogFormatter()
+   {
+   }
 
-    LCT_ERR_CODE format(CLogStream& stream) const
-    {
-        return static_cast<CFormatType*>(this)->Format(stream);
-    }
+   LCT_ERR_CODE format(CLogStream& stream) const
+   {
+      return static_cast<CFormatType*>(this)->Format(stream);
+   }
 
 };
 
 class CLctLogStream;
 
 /*******************************************************************************
- *    Date & Time appenders
+ *   Date & Time appenders
  * *****************************************************************************/
-class CLCTLogFormatterDate final:public CLctLogFormatter<CLCTLogFormatterDate, CLctLogStream>
+class CIVALogFormatterDate final:public CLctLogFormatter<CIVALogFormatterDate, CLctLogStream>
 {
 public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
 };
 
-class CLCTLogFormatterTime final:public CLctLogFormatter<CLCTLogFormatterTime, CLctLogStream>
+class CIVALogFormatterTime final:public CLctLogFormatter<CIVALogFormatterTime, CLctLogStream>
 {
 public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
 };
 
 // milliseconds
-class CLCTLogFormatterMillisecond final:public CLctLogFormatter<CLCTLogFormatterMillisecond, CLctLogStream>
+class CIVALogFormatterMillisecond final:public CLctLogFormatter<CIVALogFormatterMillisecond, CLctLogStream>
 {
 public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
 };
 
 // microseconds
-class CLCTLogFormatterMicrosecond final:public CLctLogFormatter<CLCTLogFormatterMicrosecond, CLctLogStream>
+class CIVALogFormatterMicrosecond final:public CLctLogFormatter<CIVALogFormatterMicrosecond, CLctLogStream>
 {
 public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
 };
 
 // nanoseconds
-class CLCTLogFormatterNanosecond final:public CLctLogFormatter<CLCTLogFormatterNanosecond, CLctLogStream>
+class CIVALogFormatterNanosecond final:public CLctLogFormatter<CIVALogFormatterNanosecond, CLctLogStream>
 {
 public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
 };
 
 /*******************************************************************************
- *    Thread & Process appenders
+ *   Thread & Process appenders
  * *****************************************************************************/
-class CLCTLogFormatterThread final:public CLctLogFormatter<CLCTLogFormatterThread, CLctLogStream>
+class CIVALogFormatterThread final:public CLctLogFormatter<CIVALogFormatterThread, CLctLogStream>
 {
 public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
 };
 
-class CLCTLogFormatterPid final:public CLctLogFormatter<CLCTLogFormatterPid, CLctLogStream>
+class CIVALogFormatterPid final:public CLctLogFormatter<CIVALogFormatterPid, CLctLogStream>
 {
 public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
-};
-
-
-/*******************************************************************************
- *    Logger Name & Log lever appenders
- * *****************************************************************************/
-class CLCTLogFormatterLoggerName final:public CLctLogFormatter<CLCTLogFormatterLoggerName, CLctLogStream>
-{
-public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
-};
-
-class CLCTLogFormatterLogLevel final:public CLctLogFormatter<CLCTLogFormatterLogLevel, CLctLogStream>
-{
-public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
-};
-
-class CLCTLogFormatterShortLogLevel final:public CLctLogFormatter<CLCTLogFormatterShortLogLevel, CLctLogStream>
-{
-public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
 };
 
 
 /*******************************************************************************
- *    Location appenders
+ *   Logger Name & Log lever appenders
  * *****************************************************************************/
-class CLCTLogFormatterLocation final:public CLctLogFormatter<CLCTLogFormatterLocation, CLctLogStream>
+class CIVALogFormatterLoggerName final:public CLctLogFormatter<CIVALogFormatterLoggerName, CLctLogStream>
 {
 public:
-    LCT_ERR_CODE format(CLctLogStream& stream) const;
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
+};
+
+class CIVALogFormatterLogLevel final:public CLctLogFormatter<CIVALogFormatterLogLevel, CLctLogStream>
+{
+public:
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
+};
+
+class CIVALogFormatterShortLogLevel final:public CLctLogFormatter<CIVALogFormatterShortLogLevel, CLctLogStream>
+{
+public:
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
+};
+
+
+/*******************************************************************************
+ *   Location appenders
+ * *****************************************************************************/
+class CIVALogFormatterLocation final:public CLctLogFormatter<CIVALogFormatterLocation, CLctLogStream>
+{
+public:
+   LCT_ERR_CODE format(CLctLogStream& stream) const;
 };
 
 

@@ -21,13 +21,13 @@
 #pragma warning(push)
 #pragma warning(disable : 4251 4275)
 
-#define MONGOCXX_INLINE inline MONGOCXX_PRLCTTE
+#define MONGOCXX_INLINE inline MONGOCXX_PRIVATE
 
 #define MONGOCXX_CALL __cdecl
 
 #else
 
-#define MONGOCXX_INLINE inline MONGOCXX_PRLCTTE
+#define MONGOCXX_INLINE inline MONGOCXX_PRIVATE
 
 #define MONGOCXX_CALL
 

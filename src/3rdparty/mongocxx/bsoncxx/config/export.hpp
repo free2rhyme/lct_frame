@@ -4,7 +4,7 @@
 
 #ifdef BSONCXX_STATIC
 #  define BSONCXX_API
-#  define BSONCXX_PRLCTTE
+#  define BSONCXX_PRIVATE
 #else
 #  ifndef BSONCXX_API
 #    ifdef BSONCXX_EXPORT
@@ -16,8 +16,8 @@
 #    endif
 #  endif
 
-#  ifndef BSONCXX_PRLCTTE
-#    define BSONCXX_PRLCTTE __attribute__((visibility("hidden")))
+#  ifndef BSONCXX_PRIVATE
+#    define BSONCXX_PRIVATE __attribute__((visibility("hidden")))
 #  endif
 #endif
 
@@ -30,7 +30,7 @@
 #endif
 
 #ifndef BSONCXX_DEPRECATED_NO_EXPORT
-#  define BSONCXX_DEPRECATED_NO_EXPORT BSONCXX_PRLCTTE BSONCXX_DEPRECATED
+#  define BSONCXX_DEPRECATED_NO_EXPORT BSONCXX_PRIVATE BSONCXX_DEPRECATED
 #endif
 
 #if 0 /* DEFINE_NO_DEPRECATED */

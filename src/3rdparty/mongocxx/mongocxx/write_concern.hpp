@@ -229,9 +229,9 @@ class MONGOCXX_API write_concern {
     friend database;
     friend uri;
 
-    class MONGOCXX_PRLCTTE impl;
+    class MONGOCXX_PRIVATE impl;
 
-    MONGOCXX_PRLCTTE write_concern(std::unique_ptr<impl>&& implementation);
+    MONGOCXX_PRIVATE write_concern(std::unique_ptr<impl>&& implementation);
 
     std::unique_ptr<impl> _impl;
 };

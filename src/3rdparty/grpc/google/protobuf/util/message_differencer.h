@@ -346,7 +346,7 @@ class LIBPROTOBUF_EXPORT MessageDifferencer {
   enum MessageFieldComparison {
     EQUAL,       // Fields must be present in both messages
                  // for the messages to be considered the same.
-    EQULCTLENT,  // Fields with default values are considered set
+    EQUIVALENT,  // Fields with default values are considered set
                  // for comparison purposes even if not explicitly
                  // set in the messages themselves.  Unknown fields
                  // are ignored.

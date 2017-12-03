@@ -19,13 +19,13 @@
 #pragma warning(push)
 #pragma warning(disable : 4251 4275)
 
-#define BSONCXX_INLINE inline BSONCXX_PRLCTTE
+#define BSONCXX_INLINE inline BSONCXX_PRIVATE
 
 #define BSONCXX_CALL __cdecl
 
 #else
 
-#define BSONCXX_INLINE inline BSONCXX_PRLCTTE
+#define BSONCXX_INLINE inline BSONCXX_PRIVATE
 
 #define BSONCXX_CALL
 

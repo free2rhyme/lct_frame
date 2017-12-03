@@ -87,9 +87,9 @@ class MONGOCXX_API pool {
     stdx::optional<entry> try_acquire();
 
    private:
-    MONGOCXX_PRLCTTE void _release(client* client);
+    MONGOCXX_PRIVATE void _release(client* client);
 
-    class MONGOCXX_PRLCTTE impl;
+    class MONGOCXX_PRIVATE impl;
     const std::unique_ptr<impl> _impl;
 };
 

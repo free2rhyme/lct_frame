@@ -56,8 +56,8 @@ static_assert(false, "BSONCXX_ENUM must be undef'ed");
 #pragma pop_macro("BSONCXX_API_H")
 #undef BSONCXX_API
 #pragma pop_macro("BSONCXX_API")
-#undef BSONCXX_PRLCTTE
-#pragma pop_macro("BSONCXX_PRLCTTE")
+#undef BSONCXX_PRIVATE
+#pragma pop_macro("BSONCXX_PRIVATE")
 #undef BSONCXX_DEPRECATED
 #pragma pop_macro("BSONCXX_DEPRECATED")
 #undef BSONCXX_DEPRECATED_EXPORT

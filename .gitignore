@@ -17,9 +17,9 @@
 *.dll
 *.pb.cc
 *.pb.h
-!src/3rdparty/grpc/google/protobuf/*.pb.cc
-!src/3rdparty/grpc/google/protobuf/*.pb.h
 build/bin
+!src/3rdparty/**/*.pb.cc
+!src/3rdparty/**/*.pb.h
 
 # Fortran module files
 *.mod
@@ -30,6 +30,8 @@ build/bin
 *.la
 *.a
 *.lib
+!src/3rdparty/**/*.a
+!src/3rdparty/**/*.so*
 
 # Executables
 *.exe
@@ -66,3 +68,4 @@ __pycache__
 *.log
 
 
+/Debug/

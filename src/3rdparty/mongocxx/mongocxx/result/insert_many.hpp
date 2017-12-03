@@ -66,7 +66,7 @@ class MONGOCXX_API insert_many {
     friend collection;
     friend insert_many_builder;
 
-    MONGOCXX_PRLCTTE insert_many(result::bulk_write result, bsoncxx::array::view inserted_ids);
+    MONGOCXX_PRIVATE insert_many(result::bulk_write result, bsoncxx::array::view inserted_ids);
 
     result::bulk_write _result;
 

@@ -1,0 +1,29 @@
+
+syntax = "proto3";
+
+import "common.proto";
+
+package lowcost.vip.serviceid;
+
+//int32 SEED_TYPE_GLOBAL_ID        = 1001;
+//int32 SEED_TYPE_DAY_SWITCH       = 1002;
+//int32 SEED_TYPE_MONTH_SWITCH     = 1003;
+//int32 SEED_TYPE_SNOW_FLAKE       = 1004;
+
+message CSidRequest 
+{    
+    int32         seedId      = 1;
+}
+
+message CSidResponse 
+{
+    lowcost.vip.common.CResult   result      = 1;
+    int64         uniqueId    = 2;
+    string        date        = 3;          //YYYYMMDD for DAY_SWITCH_ID, and YYYYMM for MONTH_SWITCH_ID
+}
+
+service ServiceLctUniqueId
+{
+    rpc LoadSeed(lowcost.vip.common.CDummyReq) returns (lowcost.vip.common.CDummyResp) {}
+    rpc FetchId(CSidRequest) returns (CSidResponse) {}
+}

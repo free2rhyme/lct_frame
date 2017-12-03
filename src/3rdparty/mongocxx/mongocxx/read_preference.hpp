@@ -216,9 +216,9 @@ class MONGOCXX_API read_preference {
     friend MONGOCXX_API bool MONGOCXX_CALL
     operator==(const read_preference&, const read_preference&);
 
-    class MONGOCXX_PRLCTTE impl;
+    class MONGOCXX_PRIVATE impl;
 
-    MONGOCXX_PRLCTTE read_preference(std::unique_ptr<impl>&& implementation);
+    MONGOCXX_PRIVATE read_preference(std::unique_ptr<impl>&& implementation);
 
     std::unique_ptr<impl> _impl;
 };

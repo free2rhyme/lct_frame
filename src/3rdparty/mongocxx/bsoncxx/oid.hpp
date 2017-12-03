@@ -134,7 +134,7 @@ class BSONCXX_API oid {
     const char* bytes() const;
 
    private:
-    friend BSONCXX_PRLCTTE int oid_compare(const oid& lhs, const oid& rhs);
+    friend BSONCXX_PRIVATE int oid_compare(const oid& lhs, const oid& rhs);
 
     std::array<char, 12> _bytes;
 };

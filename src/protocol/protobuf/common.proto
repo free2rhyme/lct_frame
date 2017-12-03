@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package lowcost.vip.common;
+
+message CResult
+{
+    int32 result_code = 1;
+    string result_desc = 2;
+}
+
+message CDummyReq
+{
+}
+
+message CDummyResp
+{
+    CResult result = 1;
+}
+

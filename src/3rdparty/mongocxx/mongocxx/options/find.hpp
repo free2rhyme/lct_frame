@@ -462,7 +462,7 @@ class MONGOCXX_API find {
     ///
     /// Clears the modifiers member. Internal-only.
     ///
-    MONGOCXX_PRLCTTE find& modifiers_clear();
+    MONGOCXX_PRIVATE find& modifiers_clear();
 
    private:
     stdx::optional<bool> _allow_partial_results;

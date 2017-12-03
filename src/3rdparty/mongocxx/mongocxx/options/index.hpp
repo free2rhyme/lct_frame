@@ -47,7 +47,7 @@ class MONGOCXX_API index {
 
        private:
         friend collection;
-        MONGOCXX_PRLCTTE virtual int type() const = 0;
+        MONGOCXX_PRIVATE virtual int type() const = 0;
     };
 
     ///
@@ -74,7 +74,7 @@ class MONGOCXX_API index {
 
        private:
         friend collection;
-        MONGOCXX_PRLCTTE int type() const override;
+        MONGOCXX_PRIVATE int type() const override;
         stdx::optional<bsoncxx::string::view_or_value> _config_string;
     };
 

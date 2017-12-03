@@ -7,8 +7,7 @@ endif
 SRC_DIR           := detail
 TARGET_TYPE       = lib
 SRC_SUFFIX        = cpp
-
-INC_DIR           += -I$(LCT_SVC_PRJ_ROOT)/src/log
+INC_DIR           += -I$(LCT_SVC_PRJ_ROOT)/src/common -I$(LCT_SVC_PRJ_ROOT)/src/log
 SYS_LIB           += 
 DEP_OBJ           +=
 TARGET            := liblct_common.a

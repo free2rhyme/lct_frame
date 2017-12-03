@@ -208,12 +208,12 @@ class MONGOCXX_API client {
     friend class database;
     friend class pool;
 
-    MONGOCXX_PRLCTTE explicit client(void* implementation);
+    MONGOCXX_PRIVATE explicit client(void* implementation);
 
-    class MONGOCXX_PRLCTTE impl;
+    class MONGOCXX_PRIVATE impl;
 
-    MONGOCXX_PRLCTTE impl& _get_impl();
-    MONGOCXX_PRLCTTE const impl& _get_impl() const;
+    MONGOCXX_PRIVATE impl& _get_impl();
+    MONGOCXX_PRIVATE const impl& _get_impl() const;
 
     std::unique_ptr<impl> _impl;
 };

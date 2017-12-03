@@ -1,7 +1,7 @@
 
 SERVICES_LIST := protobuf 
-SERVICES_LIST += protobufcpp
-SERVICES_LIST += lctprol
+SERVICES_LIST += protobufcpp    
+SERVICES_LIST += lct_message   
 
 all debug release build rebuild:
 
@@ -14,7 +14,5 @@ clean:
 	@for item in $(SERVICES_LIST); \
 	do \
 		$(MAKE) -C $$item $@ ; \
-		rm -fr $(BUILD_DIR) ; \
 	done
-
 

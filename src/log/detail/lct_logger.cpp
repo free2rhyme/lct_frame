@@ -1,10 +1,10 @@
 /**********************************************************************
- * @copyright    Copyright (C), 2017
- * @file         lct_logger.cpp
- * @version      1.0
- * @date         Jun 9, 2017 10:00:20 AM
- * @author       wlc2rhyme@gmail.com
- * @brief        TODO
+ * @copyright   Copyright (C), 2017
+ * @file        lct_logger.cpp
+ * @version     1.0
+ * @date        Jun 9, 2017 10:00:20 AM
+ * @author      wlc2rhyme@gmail.com
+ * @brief       TODO
  *********************************************************************/
 
 #include "lct_log_sink.h"
@@ -41,17 +41,12 @@ CLctLogger::~CLctLogger()
 static constexpr int32_t LOG_ROTATE_FILE_DAILY_HOUR = 0;
 static constexpr int32_t LOG_ROTATE_FILE_DAILY_MINUTE = 0;
 
-LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir, 
-      const int64_t logLevelVal, 
-      const int64_t rotateMaxFileSize,
+LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir, const int64_t rotateMaxFileSize,
       const int64_t rotateMaxFileCount)
 {
-   LCT_ERR_CODE errCode = LCT_SUCCESS;
+   std::ios::sync_with_stdio(false);
 
-   errCode = LCT_LOG_CONFIG_MGR->init(logLevelVal);
-   if (LCT_SUCCESS != errCode) {
-      return errCode;
-   }
+   LCT_ERR_CODE errCode = LCT_SUCCESS;
 
    errCode = initLogLevel();
    if (LCT_SUCCESS != errCode) {
@@ -69,7 +64,10 @@ LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir,
        rectifiedPath = rectifiedPath + '/';
    }
 
-   errCode = initSinks(rectifiedPath, rotateMaxFileSize, rotateMaxFileCount);
+   int64_t rtSize  = rotateMaxFileSize  > 0 ? rotateMaxFileSize  : LOG_ROTATE_FILE_MAX_SIZE;
+   int64_t rtCount = rotateMaxFileCount > 0 ? rotateMaxFileCount : LOG_ROTATE_FILE_MAX_COUNT;
+
+   errCode = initSinks(rectifiedPath, rtSize, rtCount);
    if (LCT_SUCCESS != errCode) {
       return errCode;
    }
@@ -79,38 +77,45 @@ LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir,
    return errCode;
 }
 
+LCT_ERR_CODE CLctLogger::init(const std::string& logLocalDir, const std::string& configFile,
+        const int64_t rotateMaxFileSize, const int64_t rotateMaxFileCount)
+{
+   LCT_ERR_CODE errCode = LCT_SUCCESS;
+
+   errCode = LCT_LOG_CONFIG_MGR->init(configFile);
+   if (LCT_SUCCESS != errCode) {
+      return errCode;
+   }
+
+   return init(logLocalDir, rotateMaxFileSize, rotateMaxFileCount);
+}
+
 LCT_ERR_CODE CLctLogger::initSinks(const std::string& logLocalDir, const int64_t rotateMaxFileSize,
       const int64_t rotateMaxFileCount)
 {
-//    CRotateFileSinkShp rotateSinkShp( new CRotateFileSink(true, logLocalDir,
-//        program_invocation_short_name, LOG_ROTATE_FILE_MAX_SIZE, LOG_ROTATE_FILE_MAX_COUNT));
-
-//    CDailyFileSinkShp dailyFileSink(new CDailyFileSink<CDailyDateFileNameCalculator>(true,
-//        logLocalDir, program_invocation_short_name, LOG_ROTATE_FILE_DAILY_HOUR, LOG_ROTATE_FILE_DAILY_MINUTE));
-
-   CDailyRotateFileSinkShp dailyRotatSinkShp(
-         new CDailyRotateFileSink(true, logLocalDir, program_invocation_short_name, rotateMaxFileSize,
-               rotateMaxFileCount, LOG_ROTATE_FILE_DAILY_HOUR, LOG_ROTATE_FILE_DAILY_MINUTE));
-
+   if (logLocalDir.empty()) {
+      CDailyRotateTerminalSinkShp sink = std::make_shared<CDailyRotateTerminalSink>(); 
+      m_sinkPool.appendSink(sink);
+   } else {
+      CDailyRotateFileSinkShp sink = std::make_shared<CDailyRotateFileSink>(true, logLocalDir, program_invocation_short_name, rotateMaxFileSize,
+               rotateMaxFileCount, LOG_ROTATE_FILE_DAILY_HOUR, LOG_ROTATE_FILE_DAILY_MINUTE); 
+      m_sinkPool.appendSink(sink);
+   }
    //Debug version, not implemented yet
-   CRemoteSinkShp remoteSink(new CRemoteSink("127.0.0.1", 10000));
-
-//    m_sinkPool.AppendSink(rotateSinkShp);
-//    m_sinkPool.AppendSink(dailyFileSink);
-   m_sinkPool.appendSink(dailyRotatSinkShp);
-   m_sinkPool.appendSink(remoteSink);
+   // CRemoteSinkShp remoteSink(new CRemoteSink("127.0.0.1", 10000));
+   // m_sinkPool.appendSink(remoteSink);
 
    return m_sinkPool.start();
 }
 
 LCT_ERR_CODE CLctLogger::initFormatter()
 {
-   m_formatterPool.appendFormatter(CLCTLogFormatterDate());
-   m_formatterPool.appendFormatter(CLCTLogFormatterTime());
-   m_formatterPool.appendFormatter(CLCTLogFormatterMicrosecond());
-   m_formatterPool.appendFormatter(CLCTLogFormatterLogLevel());
-   m_formatterPool.appendFormatter(CLCTLogFormatterThread());
-   m_formatterPool.appendFormatter(CLCTLogFormatterLocation());
+   m_formatterPool.appendFormatter(CIVALogFormatterDate());
+   m_formatterPool.appendFormatter(CIVALogFormatterTime());
+   m_formatterPool.appendFormatter(CIVALogFormatterMicrosecond());
+   m_formatterPool.appendFormatter(CIVALogFormatterLogLevel());
+   m_formatterPool.appendFormatter(CIVALogFormatterThread());
+   m_formatterPool.appendFormatter(CIVALogFormatterLocation());
 
    return LCT_SUCCESS;
 }

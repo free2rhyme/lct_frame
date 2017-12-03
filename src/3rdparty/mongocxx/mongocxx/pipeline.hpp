@@ -359,7 +359,7 @@ class MONGOCXX_API pipeline {
    private:
     friend class collection;
 
-    class MONGOCXX_PRLCTTE impl;
+    class MONGOCXX_PRIVATE impl;
     std::unique_ptr<impl> _impl;
 };
 

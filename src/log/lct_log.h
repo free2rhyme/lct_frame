@@ -1,10 +1,10 @@
 /**********************************************************************
- * @copyright    Copyright (C), 2017
- * @file         lct_log.h
- * @version      1.0
- * @date         Jun 8, 2017 6:38:36 PM
- * @author       wlc2rhyme@gmail.com
- * @brief        TODO
+ * @copyright   Copyright (C), 2017
+ * @file        lct_log.h
+ * @version     1.0
+ * @date        Jun 8, 2017 6:38:36 PM
+ * @author      wlc2rhyme@gmail.com
+ * @brief       TODO
  *********************************************************************/
 #ifndef SRC_LOG_LCT_LOG_H_
 #define SRC_LOG_LCT_LOG_H_

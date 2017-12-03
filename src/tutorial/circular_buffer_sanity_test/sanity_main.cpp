@@ -127,7 +127,12 @@ int main()
     LCT_ERR_CODE errCode = buffer.iterate([](const CTracer& obj) {
         obj.display();
     });
-    std::cout << "Finished iterator" << std::endl;
+
+    if (LCT_SUCCESS != errCode) {
+        std::cout << "Failed to iterate circular buffer" << std::endl;
+    } else {
+        std::cout << "Finished iterator" << std::endl;
+    }
 
     CTracer ttracer;
     buffer.pop(ttracer);
@@ -136,6 +141,12 @@ int main()
     errCode = buffer.iterate([](const CTracer& obj) {
         obj.display();
     });
+
+    if (LCT_SUCCESS != errCode) {
+        std::cout << "Failed to iterate circular buffer" << std::endl;
+    } else {
+        std::cout << "Finished iterator" << std::endl;
+    }
 
     return 0;
 }

@@ -9,7 +9,7 @@ SRC_SUFFIX        = cpp
 INC_DIR           += -I$(LCT_SVC_PRJ_ROOT)/src/common -I$(LCT_SVC_PRJ_ROOT)/src/log
 SYS_LIB           += -pthread
 DEP_OBJ           += $(LIB_DIR)/liblct_log.a $(LIB_DIR)/liblct_common.a
-TARGET            := circular_buffer_sanity_test
+TARGET            := circular-buffer-sanity-test
 
 include $(LCT_SVC_PRJ_ROOT)/src/common/common.mk
 

@@ -44,8 +44,8 @@
 #pragma pop_macro("MONGOCXX_API_H")
 #undef MONGOCXX_API
 #pragma pop_macro("MONGOCXX_API")
-#undef MONGOCXX_PRLCTTE
-#pragma pop_macro("MONGOCXX_PRLCTTE")
+#undef MONGOCXX_PRIVATE
+#pragma pop_macro("MONGOCXX_PRIVATE")
 #undef MONGOCXX_DEPRECATED
 #pragma pop_macro("MONGOCXX_DEPRECATED")
 #undef MONGOCXX_DEPRECATED_EXPORT

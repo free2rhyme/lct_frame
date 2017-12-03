@@ -152,7 +152,7 @@ class BSONCXX_API validator {
     bool check_dot_keys() const;
 
    private:
-    struct BSONCXX_PRLCTTE impl;
+    struct BSONCXX_PRIVATE impl;
     std::unique_ptr<impl> _impl;
 };
 

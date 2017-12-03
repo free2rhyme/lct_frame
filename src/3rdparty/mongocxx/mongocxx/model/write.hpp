@@ -133,7 +133,7 @@ class MONGOCXX_API write {
     const replace_one& get_replace_one() const;
 
    private:
-    MONGOCXX_PRLCTTE void destroy_member() noexcept;
+    MONGOCXX_PRIVATE void destroy_member() noexcept;
 
     write_type _type;
 

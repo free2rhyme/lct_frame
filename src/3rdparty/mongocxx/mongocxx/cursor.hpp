@@ -75,9 +75,9 @@ class MONGOCXX_API cursor {
     friend class client;
     friend class database;
 
-    MONGOCXX_PRLCTTE cursor(void* cursor_ptr);
+    MONGOCXX_PRIVATE cursor(void* cursor_ptr);
 
-    class MONGOCXX_PRLCTTE impl;
+    class MONGOCXX_PRIVATE impl;
     std::unique_ptr<impl> _impl;
 };
 
@@ -133,7 +133,7 @@ class MONGOCXX_API cursor::iterator
     /// @}
     ///
 
-    MONGOCXX_PRLCTTE explicit iterator(cursor* cursor);
+    MONGOCXX_PRIVATE explicit iterator(cursor* cursor);
 
     // If this pointer is null, the iterator is considered "past-the-end".
     cursor* _cursor;

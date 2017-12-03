@@ -1,7 +1,8 @@
 
-SERVICES_LIST := echo_via_lct_frame
-SERVICES_LIST += circular_buffer_sanity_test
-SERVICES_LIST += net_service_performance_test
+SERVICES_LIST := circular_buffer_sanity_test
+SERVICES_LIST += cassandra_native_client
+SERVICES_LIST += lct_grpc_client_helper
+SERVICES_LIST += lct_grpc_service
 
 all debug release build rebuild:
 
@@ -14,5 +15,4 @@ clean:
 	@for item in $(SERVICES_LIST); \
 	do \
 		$(MAKE) -C $$item $@ ; \
-		rm -fr $(BUILD_DIR) ; \
 	done

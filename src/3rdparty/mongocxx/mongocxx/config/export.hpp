@@ -4,7 +4,7 @@
 
 #ifdef MONGOCXX_STATIC
 #  define MONGOCXX_API
-#  define MONGOCXX_PRLCTTE
+#  define MONGOCXX_PRIVATE
 #else
 #  ifndef MONGOCXX_API
 #    ifdef MONGOCXX_EXPORTS
@@ -16,8 +16,8 @@
 #    endif
 #  endif
 
-#  ifndef MONGOCXX_PRLCTTE
-#    define MONGOCXX_PRLCTTE __attribute__((visibility("hidden")))
+#  ifndef MONGOCXX_PRIVATE
+#    define MONGOCXX_PRIVATE __attribute__((visibility("hidden")))
 #  endif
 #endif
 
@@ -30,7 +30,7 @@
 #endif
 
 #ifndef MONGOCXX_DEPRECATED_NO_EXPORT
-#  define MONGOCXX_DEPRECATED_NO_EXPORT MONGOCXX_PRLCTTE MONGOCXX_DEPRECATED
+#  define MONGOCXX_DEPRECATED_NO_EXPORT MONGOCXX_PRIVATE MONGOCXX_DEPRECATED
 #endif
 
 #if 0 /* DEFINE_NO_DEPRECATED */

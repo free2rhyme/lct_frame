@@ -84,7 +84,7 @@ class MONGOCXX_API bulk_write {
     id_map upserted_ids() const;
 
    private:
-    MONGOCXX_PRLCTTE bsoncxx::document::view view() const;
+    MONGOCXX_PRIVATE bsoncxx::document::view view() const;
 
     bsoncxx::document::value _response;
 };

@@ -51,8 +51,8 @@
 #undef BSONCXX_API_H
 #pragma push_macro("BSONCXX_API")
 #undef BSONCXX_API
-#pragma push_macro("BSONCXX_PRLCTTE")
-#undef BSONCXX_PRLCTTE
+#pragma push_macro("BSONCXX_PRIVATE")
+#undef BSONCXX_PRIVATE
 #pragma push_macro("BSONCXX_DEPRECATED")
 #undef BSONCXX_DEPRECATED
 #pragma push_macro("BSONCXX_DEPRECATED_EXPORT")

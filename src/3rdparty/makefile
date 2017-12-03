@@ -1,7 +1,7 @@
 
-SERVICES_LIST := openssl
-SERVICES_LIST += grpc
+SERVICES_LIST := grpc
 SERVICES_LIST += mongocxx
+SERVICES_LIST += cassandra
 
 all debug release build rebuild:
 
@@ -14,5 +14,4 @@ clean:
 	@for item in $(SERVICES_LIST); \
 	do \
 		$(MAKE) -C $$item $@ ; \
-		rm -fr $(BUILD_DIR) ; \
 	done

@@ -1,10 +1,10 @@
 /**********************************************************************
- * @copyright    Copyright (C), 2017
- * @file         lct_thread_pool.h
- * @version      1.0
- * @date         May 23, 2017 6:05:25 PM
- * @author       wlc2rhyme@gmail.com
- * @brief        TODO
+ * @copyright   Copyright (C), 2017
+ * @file        lct_thread_pool.h
+ * @version     1.0
+ * @date        May 23, 2017 6:05:25 PM
+ * @author      wlc2rhyme@gmail.com
+ * @brief       TODO
  *********************************************************************/
 #ifndef SRC_COMMON_LCT_THREAD_POOL_H_
 #define SRC_COMMON_LCT_THREAD_POOL_H_
@@ -18,30 +18,30 @@ class CLctThreadpoolImpl;
 class CLctThreadpool final
 {
 public:
-    LCT_ERR_CODE init(const int32_t threadCount = -1);
-    LCT_ERR_CODE start();
-    LCT_ERR_CODE shutdown();
+   LCT_ERR_CODE init(const int32_t threadCount = -1);
+   LCT_ERR_CODE start();
+   LCT_ERR_CODE shutdown();
 
-    template<typename Callable, typename... Args>
-    LCT_ERR_CODE emplaceTask(Callable&& func, Args&&... vargs);
+   template<typename Callable, typename... Args>
+   LCT_ERR_CODE emplaceTask(Callable&& func, Args&&... vargs);
 
-    bool isRunning() const
-    {
-        return m_isRunning;
-    }
+   bool isRunning() const
+   {
+      return m_isRunning;
+   }
 
-    int32_t size() const;
-
-private:
-    bool                  m_isRunning           = false;
-    int32_t               m_threadCount         = 0;
-    CLctThreadpoolImpl*   m_threadpoolImplPtr   = nullptr;
+   int32_t size() const;
 
 public:
-    CLctThreadpool();
-    ~CLctThreadpool();
+   CLctThreadpool();
+   ~CLctThreadpool();
 
-    DISALLOW_COPY_MOVE_OR_ASSIGN(CLctThreadpool);
+   DISALLOW_COPY_MOVE_OR_ASSIGN(CLctThreadpool);
+
+private:
+   bool                  m_isRunning           = false;
+   int32_t               m_threadCount         = 0;
+   CLctThreadpoolImpl*   m_threadpoolImplPtr   = nullptr;
 };
 
 typedef std::shared_ptr<CLctThreadpool> CLctThreadpoolShp;

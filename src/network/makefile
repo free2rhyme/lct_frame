@@ -13,7 +13,7 @@ SRC_SUFFIX        = cpp
 INC_DIR           += -I$(LCT_SVC_PRJ_ROOT)/src/log -I$(LCT_SVC_PRJ_ROOT)/src/network
 SYS_LIB           += 
 DEP_OBJ           +=
-TARGET            := libiva_network.a
+TARGET            := liblct_network.a
 
 include $(LCT_SVC_PRJ_ROOT)/src/common/common.mk
 

@@ -76,7 +76,7 @@ class MONGOCXX_API instance {
     static instance& current();
 
    private:
-    class MONGOCXX_PRLCTTE impl;
+    class MONGOCXX_PRIVATE impl;
     std::unique_ptr<impl> _impl;
 };
 

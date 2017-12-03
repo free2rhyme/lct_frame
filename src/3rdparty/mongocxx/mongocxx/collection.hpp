@@ -657,15 +657,15 @@ class MONGOCXX_API collection {
    private:
     friend class database;
 
-    MONGOCXX_PRLCTTE collection(const database& database,
+    MONGOCXX_PRIVATE collection(const database& database,
                                 bsoncxx::string::view_or_value collection_name);
 
-    MONGOCXX_PRLCTTE collection(const database& database, void* collection);
+    MONGOCXX_PRIVATE collection(const database& database, void* collection);
 
-    class MONGOCXX_PRLCTTE impl;
+    class MONGOCXX_PRIVATE impl;
 
-    MONGOCXX_PRLCTTE impl& _get_impl();
-    MONGOCXX_PRLCTTE const impl& _get_impl() const;
+    MONGOCXX_PRIVATE impl& _get_impl();
+    MONGOCXX_PRIVATE const impl& _get_impl() const;
 
     std::unique_ptr<impl> _impl;
 };

@@ -354,7 +354,7 @@ class BSONCXX_API value {
     const b_maxkey& get_maxkey() const;
 
    private:
-    void BSONCXX_PRLCTTE destroy() noexcept;
+    void BSONCXX_PRIVATE destroy() noexcept;
 
     bsoncxx::type _type;
     union {

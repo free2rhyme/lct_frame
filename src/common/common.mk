@@ -8,22 +8,35 @@
  #####################################################################
 
 CXX             = g++
-CPP_FLAGS       += -g -O3 --std=c++11
+CPP_FLAGS_3RD   = -g -O3 --std=c++11
+CPP_FLAGS_LOOSE = -g -O1 -Wall -Wextra -Werror -Wredundant-decls -Wno-unused-parameter -Wno-shadow --std=c++11
+CPP_FLAGS_LCT   = -g -O3 -Wall -Wextra -Werror -Wcast-qual -Wredundant-decls -Wno-unused-parameter -Wno-shadow --std=c++11
+
+ifeq ($(CPP_FLAG_VERSION), 3rd)
+    CPP_FLAGS   := $(CPP_FLAGS_3RD)
+else ifeq ($(CPP_FLAG_VERSION), loose)
+    CPP_FLAGS   := $(CPP_FLAGS_3RD)
+else
+    CPP_FLAGS   := $(CPP_FLAGS_LCT)
+endif
 
 ifndef SRC_DIR
 SRC_DIR := ./
 endif
+
 
 VPATH           := $(SRC_DIR)
 CPPS            := $(foreach dir, $(VPATH), $(wildcard $(dir)/*.$(SRC_SUFFIX)))
 OBJS            := $(patsubst %.$(SRC_SUFFIX), %.o, $(notdir $(CPPS)))
 DEPS            := $(patsubst %.$(SRC_SUFFIX), %.d, $(notdir $(CPPS)))
 
-CUR_SUB_DIRS   = $(subst src, ,$(CURDIR))
-CUR_SUFFIX_DIR = $(lastword $(CUR_SUB_DIRS))
-ROOT_SUB_DIRS  = $(subst src, ,$(LCT_SVC_PRJ_ROOT))
-ROOT_PRE_DIR   = $(word $(words $(ROOT_SUB_DIRS)), $(ROOT_SUB_DIRS))
-BUILD_OBJ_DIR := $(ROOT_PRE_DIR)/build/obj$(CUR_SUFFIX_DIR)
+CUR_SUB_DIRS    := $(subst src, ,$(CURDIR))
+CUR_SUFFIX_DIR  := $(lastword $(CUR_SUB_DIRS))
+ROOT_SUB_DIRS   := $(subst src, ,$(LCT_SVC_PRJ_ROOT))
+ROOT_PRE_DIR    := $(word $(words $(ROOT_SUB_DIRS)), $(ROOT_SUB_DIRS))
+BUILD_OBJ_DIR   := $(ROOT_PRE_DIR)/build/obj$(CUR_SUFFIX_DIR)
+
+LIB_DIR         := $(ROOT_PRE_DIR)/build/lib
 
 ifeq ($(TARGET_TYPE), app)
     FIXED_TARGET_DIR    := $(ROOT_PRE_DIR)/build/bin
@@ -33,12 +46,9 @@ else
     FIXED_TARGET_DIR    := $(BUILD_OBJ_DIR)
 endif
 
-FIXED_TARGET        :=$(addprefix $(FIXED_TARGET_DIR)/, $(TARGET))
-FIXED_OBJS          :=$(addprefix $(BUILD_OBJ_DIR)/, $(OBJS))
-FIXED_DEPS          :=$(addprefix $(BUILD_OBJ_DIR)/, $(DEPS))
-
-LIB_DIR       += $(ROOT_PRE_DIR)/build/lib
-INC_DIR       += -I$(LCT_SVC_PRJ_ROOT)/src/common
+FIXED_TARGET    := $(addprefix $(FIXED_TARGET_DIR)/, $(TARGET))
+FIXED_OBJS      := $(addprefix $(BUILD_OBJ_DIR)/, $(OBJS))
+FIXED_DEPS      := $(addprefix $(BUILD_OBJ_DIR)/, $(DEPS))
 
 all debug release build:$(FIXED_OBJS)
 
@@ -70,18 +80,15 @@ endif
 	@echo "Finished building $@"
 	@echo " "
 
-clean: reclean
-	rm -fr $(BUILD_OBJ_DIR)
-	@echo " "
-
-reclean:
+clean:
+	rm -fr $(BUILD_OBJ_DIR)/*
 	rm -f $(FIXED_OBJS)
 	rm -f $(FIXED_DEPS)
 	rm -f $(FIXED_TARGET)
 	@echo " "
 
-rebuild:reclean all
+rebuild:clean all
 
-.PHONY:clean reclean rebuild
+.PHONY:clean rebuild
 
 

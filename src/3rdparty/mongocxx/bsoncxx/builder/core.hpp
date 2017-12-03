@@ -41,7 +41,7 @@ namespace builder {
 ///
 class BSONCXX_API core {
    public:
-    class BSONCXX_PRLCTTE impl;
+    class BSONCXX_PRIVATE impl;
 
     ///
     /// Constructs an empty BSON datum.

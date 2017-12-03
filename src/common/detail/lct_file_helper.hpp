@@ -1,10 +1,10 @@
 /**********************************************************************
- * @copyright    Copyright (C), 2017
- * @file         lct_file_helper.hpp
- * @version      1.0
- * @date         Jun 9, 2017 3:15:08 PM
- * @author       wlc2rhyme@gmail.com
- * @brief        TODO
+ * @copyright   Copyright (C), 2017
+ * @file        lct_file_helper.hpp
+ * @version     1.0
+ * @date        Jun 9, 2017 3:15:08 PM
+ * @author      wlc2rhyme@gmail.com
+ * @brief       TODO
  *********************************************************************/
 #ifndef SRC_COMMON_LCT_FILE_HELPER_HPP_
 #define SRC_COMMON_LCT_FILE_HELPER_HPP_
@@ -12,29 +12,29 @@
 template <typename T>
 LCT_ERR_CODE CFileHelper::write(const T& val)
 {
-    if (!m_fd) {
-        return LCT_INVALID_FD;
-    }
-    try {
-        if (m_isBinary) {
-            if (std::fwrite(&val, sizeof(T), 1, m_fd) != 1){
-                return LCT_FAIL;
-            }
-        } else {
-            WriteTextValue(val);
-        }
-    } catch (const std::exception& e) {
-        return LCT_UNEXPECTED;
-    } catch (...) {
-        return LCT_UNEXPECTED;
-    }
-    return LCT_SUCCESS;
+   if (!m_fd) {
+      return LCT_INVALID_FD;
+   }
+   try {
+      if (m_isBinary) {
+         if (std::fwrite(&val, sizeof(T), 1, m_fd) != 1){
+            return LCT_FAIL;
+         }
+      } else {
+         WriteTextValue(val);
+      }
+   } catch (const std::exception& e) {
+      return LCT_UNEXPECTED;
+   } catch (...) {
+      return LCT_UNEXPECTED;
+   }
+   return LCT_SUCCESS;
 }
 
 template <typename T>
 std::size_t CFileHelper::writeTextValue(const T& val)
 {
-    return std::fwrite(&val, sizeof(T), 1, m_fd);
+   return std::fwrite(&val, sizeof(T), 1, m_fd);
 }
 
 template <>

@@ -1,10 +1,10 @@
 /**********************************************************************
- * @copyright    Copyright (C), 2017
- * @file         lct_error_code.h
- * @version      1.0
- * @date         May 17, 2017 11:32:52 AM
- * @author       wlc2rhyme@gmail.com
- * @brief        TODO
+ * @copyright   Copyright (C), 2017
+ * @file        lct_error_code.h
+ * @version     1.0
+ * @date        May 17, 2017 11:32:52 AM
+ * @author      wlc2rhyme@gmail.com
+ * @brief       TODO
  *********************************************************************/
 #ifndef SRC_COMMON_LCT_ERROR_CODE_H_
 #define SRC_COMMON_LCT_ERROR_CODE_H_
@@ -25,12 +25,20 @@ constexpr LCT_ERR_CODE LCT_OUT_OF_BOUNDARY        = 0x00000006;    //
 constexpr LCT_ERR_CODE LCT_INVALID_FD             = 0x00000007;    //
 constexpr LCT_ERR_CODE LCT_TIMEOUT                = 0x00000008;    //
 constexpr LCT_ERR_CODE LCT_SERVICE_DOWN           = 0x00000009;    //
+constexpr LCT_ERR_CODE LCT_EVENT_HALT             = 0x00000010;    //
+constexpr LCT_ERR_CODE LCT_VERSION_INFO           = 0x8000F000;    // Print out version info
 constexpr LCT_ERR_CODE LCT_EMPTY_RECORD           = 0x8000F001;    // Empty record
 constexpr LCT_ERR_CODE LCT_RECORD_EXISTS          = 0x8000F002;    // Record exists
 constexpr LCT_ERR_CODE LCT_NOT_SUCH_RECORD        = 0x8000F003;    // Not such record
 constexpr LCT_ERR_CODE LCT_UNIMPLEMENTED          = 0x8000F004;    // Unimplemented
 constexpr LCT_ERR_CODE LCT_INVALID_BIZ_TYPE       = 0x8000F005;    // Invalid business type
 constexpr LCT_ERR_CODE LCT_NOT_INITIATED_YET      = 0x8000F006;    // Uninitiated yet
+constexpr LCT_ERR_CODE LCT_NON_FEATURE_VERSION    = 0x8000F007;    // Invalid feature verson
+constexpr LCT_ERR_CODE LCT_BATCH_SIZE_OVERFLOW    = 0x8000F008;    // Batch size overflow
+constexpr LCT_ERR_CODE LCT_CASS_NO_HOST           = 0x8000F009;    // Cass No hosts available
+constexpr LCT_ERR_CODE LCT_INVALID_STRATEGY       = 0x8000F010;    // Invalid Correlate Strategy
+constexpr LCT_ERR_CODE LCT_EVENT_DONE             = 0x8000F011;    // Event is done
+constexpr LCT_ERR_CODE LCT_INVALID_TASK_STATUS    = 0x8000F012;    // Event status is unrecognized.
 
 constexpr LCT_ERR_CODE LCT_SYSTEM_ERROR           = 0x8000F101;    // System API error
 constexpr LCT_ERR_CODE LCT_INVALID_SOCKET         = 0x8000F106;    // Invalid socket.
