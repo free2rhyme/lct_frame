@@ -13,7 +13,6 @@ prepare_script()
     cp ${LCT_SVC_PRJ_ROOT}/src/tool/serve/process.sh ${PREBUILD_DIR}/
     cp ${LCT_SVC_PRJ_ROOT}/src/tool/script/lct_service_prep.sh ${PREBUILD_SCRIPT_DIR}/
     cp ${BUILD_BIN_DIR}/iva-id-table-prep ${PREBUILD_BIN_DIR}/
-    cp ${BUILD_BIN_DIR}/poi-table-prep ${PREBUILD_BIN_DIR}/
     cp ${LCT_SVC_PRJ_ROOT}/src/tool/script/install.sh ${PREBUILD_DIR}/
     cp ${LCT_SVC_PRJ_ROOT}/src/tool/script/uninstall.sh ${PREBUILD_DIR}/
     cp ${LCT_SVC_PRJ_ROOT}/src/tool/script/lct_monitor.sh ${PREBUILD_SCRIPT_DIR}/

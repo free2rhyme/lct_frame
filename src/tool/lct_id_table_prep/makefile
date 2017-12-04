@@ -16,6 +16,6 @@ DEP_OBJ           += $(LCT_SVC_PRJ_ROOT)/src/3rdparty/cassandra/lib/libcassandra
 DEP_OBJ           += $(LCT_SVC_PRJ_ROOT)/src/3rdparty/uv/lib/libuv.a
 DEP_OBJ           += $(LIB_DIR)/liblct_log.a $(LIB_DIR)/liblct_common.a
 
-TARGET            := iva-id-table-prep
+TARGET            := lct-id-table-prep
 
 include $(LCT_SVC_PRJ_ROOT)/src/common/common.mk
