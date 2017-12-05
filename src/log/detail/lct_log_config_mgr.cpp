@@ -22,12 +22,12 @@ LCT_ERR_CODE CLctLogConfigMgr::init(const std::string& configFile)
       std::cout << "Successful to load Lct Log properties file" << std::endl;
    }
 
-   m_traceLevel  = properties.getBool("lct_log.h.LevelEnable.Trace", true);
-   m_debugLevel  = properties.getBool("lct_log.h.LevelEnable.Debug", true);
-   m_inforLevel  = properties.getBool("lct_log.h.LevelEnable.Infor", true);
-   m_warngLevel  = properties.getBool("lct_log.h.LevelEnable.Warng", true);
-   m_errorLevel  = properties.getBool("lct_log.h.LevelEnable.Error", true);
-   m_critcLevel  = properties.getBool("lct_log.h.LevelEnable.Critc", true);
+   m_traceLevel  = properties.getBool("LctLog.LevelEnable.Trace", true);
+   m_debugLevel  = properties.getBool("LctLog.LevelEnable.Debug", true);
+   m_inforLevel  = properties.getBool("LctLog.LevelEnable.Infor", true);
+   m_warngLevel  = properties.getBool("LctLog.LevelEnable.Warng", true);
+   m_errorLevel  = properties.getBool("LctLog.LevelEnable.Error", true);
+   m_critcLevel  = properties.getBool("LctLog.LevelEnable.Critc", true);
   
    return LCT_SUCCESS;
 }

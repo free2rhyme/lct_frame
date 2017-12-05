@@ -55,7 +55,9 @@ int32_t LctFormatedTime2IntDate(const std::string& time);
 //@return: UTC seconds
 int64_t LctUtcTime2Seconds(const std::string& time);
 
-//
+//@return:seconds
+int64_t IvaLocal2UtcTimezoneGap();
+
 //@argv:   YYYYMMDD, [beginDate , endDate]
 const std::vector<int32_t> RetrieveRangeDate(const int32_t beginDate, const int32_t endDate);
 

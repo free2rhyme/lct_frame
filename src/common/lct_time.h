@@ -62,6 +62,8 @@ public:
 
    LctTmType timePoint2Tm(const LctTimePointType& tmPoint) const;
 
+   //@return:seconds
+   int64_t timeZoneGap() const;
 private:
    LCT_ERR_CODE initialize() override;
 

@@ -59,7 +59,8 @@ static LCT_ERR_CODE argvHandle(int argc, char* argv[], std::string& configFilePa
     return errCode;
 }
 
-static void InterruptedCallback(int signal){
+static void InterruptedCallback(int signal)
+{
     std::cout << __LINE__ << "\t InterruptedCallback is triggered......" << std::endl;
 
     LCT_SID_MGR->shutdown();
@@ -67,7 +68,8 @@ static void InterruptedCallback(int signal){
     std::cout << __LINE__ << "\t InterruptedCallback is closing......" << std::endl;
 }
 
-static void InitSignalHandle(){
+static void InitSignalHandle()
+{
     signal(SIGPIPE, InterruptedCallback);
     signal(SIGHUP, InterruptedCallback);
     signal(SIGQUIT, InterruptedCallback);
@@ -75,7 +77,8 @@ static void InitSignalHandle(){
     signal(SIGINT, InterruptedCallback);
 }
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[])
+{
     LCT_ERR_CODE errCode = LCT_SUCCESS;
 
     std::string configFilePath = "";
@@ -110,7 +113,7 @@ int main(int argc, char* argv[]){
     }
 
     /**************** Log System ****************/
-    errCode = LCT_LOG->init(SID_CONFIG_MGR->logDir());
+    errCode = LCT_LOG->init(SID_CONFIG_MGR->logDir(), configFilePath);
     if(LCT_SUCCESS != errCode){
         LOG_ERROR << "Failed to init IVA Log System due to error(" << ErrCodeFormat(errCode) << ")";
         return errCode;

@@ -70,4 +70,9 @@ inline int64_t LctUtcTime2Seconds(const std::string& time)
    return LCT_TIME->utcTime2Seconds(time);
 }
 
+inline int64_t IvaLocal2UtcTimezoneGap()
+{
+   return LCT_TIME->timeZoneGap();
+}
+
 #endif /* SRC_COMMON_DETAIL_LCT_COMMON_UTIL_INL_ */

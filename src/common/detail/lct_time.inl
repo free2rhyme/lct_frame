@@ -17,6 +17,11 @@ inline CLctTime::LctTmType CLctTime::timePoint2Tm(const LctTimePointType& tmPoin
    return tstruct;
 }
 
+inline int64_t CLctTime::timeZoneGap() const
+{
+   return m_timezoneGap;
+}
+
 #endif /* SRC_COMMON_LCT_TIME_INL_ */
 
 
