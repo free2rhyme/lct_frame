@@ -16,17 +16,17 @@
 class CSidServiceMgr final:public CLctSingleton<CSidServiceMgr>
 {
 public:
-    LCT_ERR_CODE init();
-    LCT_ERR_CODE run();
-    LCT_ERR_CODE shutdown();
+   LCT_ERR_CODE init();
+   LCT_ERR_CODE run();
+   LCT_ERR_CODE shutdown();
 
 private:
-    friend class CLctSingleton;
-    CSidServiceMgr();
-    ~CSidServiceMgr();
+   friend class CLctSingleton;
+   CSidServiceMgr();
+   ~CSidServiceMgr();
 
 private:
-    CSidServiceShp    m_serviceShp;
+   CSidServiceShp    m_serviceShp;
 };
 
 #define LCT_SID_MGR CSidServiceMgr::instance()

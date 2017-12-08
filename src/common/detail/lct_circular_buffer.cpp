@@ -146,21 +146,21 @@ LCT_ERR_CODE CLctCircularBuffer<char>::popN(std::size_t n)
 {
    if (m_count < n) {
        return LCT_FAIL;
-    }
-    LCT_ERR_CODE errCode = LCT_SUCCESS;
-    if (m_vlast > m_vfirst) {
-       increment(m_vfirst, n);
-       m_count -= n;
-    } else {
-       while ((m_count > 0) && (n-- > 0)) {
-          errCode = pop();
-          if (LCT_SUCCESS != errCode) {
-             return errCode;
-          }
-       }
-    }
+   }
+   LCT_ERR_CODE errCode = LCT_SUCCESS;
+   if (m_vlast > m_vfirst) {
+      increment(m_vfirst, n);
+      m_count -= n;
+   } else {
+      while ((m_count > 0) && (n-- > 0)) {
+         errCode = pop();
+         if (LCT_SUCCESS != errCode) {
+            return errCode;
+         }
+      }
+   }
 
-    return errCode;
+   return errCode;
 }
 
 LCT_ERR_CODE CLctCircularBuffer<char>::append(const char ptr)

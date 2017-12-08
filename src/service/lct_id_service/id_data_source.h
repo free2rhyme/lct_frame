@@ -15,29 +15,29 @@
 class CSidDataSource final: public CLctSingleton<CSidDataSource>
 {
 public:
-    LCT_ERR_CODE init(
-            const uint16_t dbPort,
-            const std::string& dbHosts,
-            const std::string& keyspace,
-            const std::string& idTable);
+   LCT_ERR_CODE init(
+           const uint16_t dbPort,
+           const std::string& dbHosts,
+           const std::string& keyspace,
+           const std::string& idTable);
 
-    LCT_ERR_CODE close();
+   LCT_ERR_CODE close();
 
-    LCT_ERR_CODE query(const LCT_SEED_ID_TYPE seedId, const ESeedType seedType, CEngineInfo& info);
+   LCT_ERR_CODE query(const LCT_SEED_ID_TYPE seedId, const ESeedType seedType, CEngineInfo& info);
 
-    LCT_ERR_CODE persist(const LCT_SEED_ID_TYPE seedId, const ESeedType seedType, const CEngineInfo& info);
+   LCT_ERR_CODE persist(const LCT_SEED_ID_TYPE seedId, const ESeedType seedType, const CEngineInfo& info);
 
 public:
-    CSidDataSource();
-    ~CSidDataSource();
+   CSidDataSource();
+   ~CSidDataSource();
 
-    DISALLOW_COPY_MOVE_OR_ASSIGN(CSidDataSource);
+   DISALLOW_COPY_MOVE_OR_ASSIGN(CSidDataSource);
 
 private:
-    uint16_t      m_dbPort  = UNINITIALIZED_PORT;
-    std::string   m_dbHosts = UNINITIALIZED_IP;
-    std::string   m_keyspace;
-    std::string   m_idTable;
+   uint16_t      m_dbPort  = UNINITIALIZED_PORT;
+   std::string   m_dbHosts = UNINITIALIZED_IP;
+   std::string   m_keyspace;
+   std::string   m_idTable;
 };
 
 #define ID_DATA_SRC CSidDataSource::instance()

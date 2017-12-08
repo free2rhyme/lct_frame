@@ -25,12 +25,12 @@ typedef std::chrono::milliseconds LctTimeValueType;
 
 const std::string LctCurrentTime()  //HH:MM:SS
 {
-    std::time_t now = LctClockType::to_time_t(LctClockType::now());
-    struct tm tstruct;
-    tstruct = *localtime_r(&now, &tstruct);
-    char buf[80] = { 0 };
-    strftime(buf, sizeof(buf), "%X", &tstruct);
-    return buf;
+   std::time_t now = LctClockType::to_time_t(LctClockType::now());
+   struct tm tstruct;
+   tstruct = *localtime_r(&now, &tstruct);
+   char buf[80] = { 0 };
+   strftime(buf, sizeof(buf), "%X", &tstruct);
+   return buf;
 }
 
 #define log_trace() std::cout << LctCurrentTime() << "\t" << __LINE__ << "\t" << __PRETTY_FUNCTION__ << "\t" << __LINE__ << "\t" << getpid() << "\t" << std::this_thread::get_id() << std::endl
@@ -40,74 +40,74 @@ const std::string LctCurrentTime()  //HH:MM:SS
 class CTracer
 {
 public:
-    CTracer() noexcept(true)
-    {
-        log_object();
-        m_ptr = new char[BUFFER_SIZE];
-    }
+   CTracer() noexcept(true)
+   {
+       log_object();
+       m_ptr = new char[BUFFER_SIZE];
+   }
 
-    explicit CTracer(const int32_t i) noexcept(true): m_id(i)
-    {
-        m_ptr = new char[BUFFER_SIZE];
-        log_object();
-    }
+   explicit CTracer(const int32_t i) noexcept(true): m_id(i)
+   {
+       m_ptr = new char[BUFFER_SIZE];
+       log_object();
+   }
 
-    ~CTracer() noexcept(true)
-    {
-        log_object();
-        if (m_ptr != nullptr) {
-            delete[] m_ptr;
-        }
-    }
+   ~CTracer() noexcept(true)
+   {
+       log_object();
+       if (m_ptr != nullptr) {
+           delete[] m_ptr;
+       }
+   }
 
-    CTracer(const CTracer& that) noexcept(true): m_id(that.m_id)
-    {
-        m_ptr = new char[BUFFER_SIZE];
-        printf("%d: Tracer(%p), that(%p), m_ptr(%p), that.m_ptr(%p), %s, m_id(%d)\n", __LINE__, this, &that, m_ptr,
-                that.m_ptr, __PRETTY_FUNCTION__, m_id);
-    }
+   CTracer(const CTracer& that) noexcept(true): m_id(that.m_id)
+   {
+       m_ptr = new char[BUFFER_SIZE];
+       printf("%d: Tracer(%p), that(%p), m_ptr(%p), that.m_ptr(%p), %s, m_id(%d)\n", __LINE__, this, &that, m_ptr,
+               that.m_ptr, __PRETTY_FUNCTION__, m_id);
+   }
 
-    CTracer& operator=(const CTracer& that) noexcept(true)
-    {
-        m_id = that.m_id;
-        printf("%d: Tracer(%p), that(%p), m_ptr(%p), that.m_ptr(%p), %s, m_id(%d)\n", __LINE__, this, &that, m_ptr,
-                that.m_ptr, __PRETTY_FUNCTION__, m_id);
-        return *this;
-    }
+   CTracer& operator=(const CTracer& that) noexcept(true)
+   {
+       m_id = that.m_id;
+       printf("%d: Tracer(%p), that(%p), m_ptr(%p), that.m_ptr(%p), %s, m_id(%d)\n", __LINE__, this, &that, m_ptr,
+               that.m_ptr, __PRETTY_FUNCTION__, m_id);
+       return *this;
+   }
 
-    CTracer(CTracer&& that) noexcept(true) :
-            m_id(that.m_id)
-    {
-        m_ptr = new char[BUFFER_SIZE];
-        that.m_ptr = nullptr;
-        that.m_id = -1;
-        printf("%d: Tracer(%p), that(%p), m_ptr(%p), that.m_ptr(%p), %s, m_id(%d)\n", __LINE__, this, &that, m_ptr,
-                that.m_ptr, __PRETTY_FUNCTION__, m_id);
-    }
+   CTracer(CTracer&& that) noexcept(true) :
+           m_id(that.m_id)
+   {
+       m_ptr = new char[BUFFER_SIZE];
+       that.m_ptr = nullptr;
+       that.m_id = -1;
+       printf("%d: Tracer(%p), that(%p), m_ptr(%p), that.m_ptr(%p), %s, m_id(%d)\n", __LINE__, this, &that, m_ptr,
+               that.m_ptr, __PRETTY_FUNCTION__, m_id);
+   }
 
-    CTracer& operator=(CTracer&& that) noexcept(true)
-    {
-        m_id = that.m_id;
-        that.m_id = -1;
-        printf("%d: Tracer(%p), that(%p), m_ptr(%p), that.m_ptr(%p), %s, m_id(%d)\n", __LINE__, this, &that, m_ptr,
-                that.m_ptr, __PRETTY_FUNCTION__, m_id);
-        return *this;
-    }
+   CTracer& operator=(CTracer&& that) noexcept(true)
+   {
+       m_id = that.m_id;
+       that.m_id = -1;
+       printf("%d: Tracer(%p), that(%p), m_ptr(%p), that.m_ptr(%p), %s, m_id(%d)\n", __LINE__, this, &that, m_ptr,
+               that.m_ptr, __PRETTY_FUNCTION__, m_id);
+       return *this;
+   }
 
-    void display() const
-    {
-        printf("Tracer(%p), m_id(%d)\n", this, m_id);
-    }
+   void display() const
+   {
+       printf("Tracer(%p), m_id(%d)\n", this, m_id);
+   }
 
-    int32_t size() const
-    {
-        return BUFFER_SIZE + sizeof(m_id);
-    }
+   int32_t size() const
+   {
+       return BUFFER_SIZE + sizeof(m_id);
+   }
 
 public:
-    static constexpr int32_t BUFFER_SIZE = 128 * 1024;
-    int m_id = 0;
-    char* m_ptr = nullptr;
+   static constexpr int32_t BUFFER_SIZE = 128 * 1024;
+   int m_id = 0;
+   char* m_ptr = nullptr;
 };
 
 typedef std::vector<CTracer> CTracerVec;
@@ -115,38 +115,38 @@ typedef std::vector<CTracer> CTracerVec;
 int main()
 {
 
-    CLctCircularBuffer<CTracer> buffer(20);
+   CLctCircularBuffer<CTracer> buffer(20);
 
-    buffer.emplace(100);
-    buffer.emplace(200);
-    buffer.emplace(300);
-    buffer.emplace(400);
-    buffer.emplace(500);
+   buffer.emplace(100);
+   buffer.emplace(200);
+   buffer.emplace(300);
+   buffer.emplace(400);
+   buffer.emplace(500);
 
-    std::cout << "\n\n" << "Going to iterate buffer:::::" << std::endl;
-    LCT_ERR_CODE errCode = buffer.iterate([](const CTracer& obj) {
-        obj.display();
-    });
+   std::cout << "\n\n" << "Going to iterate buffer:::::" << std::endl;
+   LCT_ERR_CODE errCode = buffer.iterate([](const CTracer& obj) {
+      obj.display();
+   });
 
-    if (LCT_SUCCESS != errCode) {
-        std::cout << "Failed to iterate circular buffer" << std::endl;
-    } else {
-        std::cout << "Finished iterator" << std::endl;
-    }
+   if (LCT_SUCCESS != errCode) {
+      std::cout << "Failed to iterate circular buffer" << std::endl;
+   } else {
+      std::cout << "Finished iterator" << std::endl;
+   }
 
-    CTracer ttracer;
-    buffer.pop(ttracer);
-    ttracer.display();
+   CTracer ttracer;
+   buffer.pop(ttracer);
+   ttracer.display();
 
-    errCode = buffer.iterate([](const CTracer& obj) {
-        obj.display();
-    });
+   errCode = buffer.iterate([](const CTracer& obj) {
+      obj.display();
+   });
 
-    if (LCT_SUCCESS != errCode) {
-        std::cout << "Failed to iterate circular buffer" << std::endl;
-    } else {
-        std::cout << "Finished iterator" << std::endl;
-    }
+   if (LCT_SUCCESS != errCode) {
+      std::cout << "Failed to iterate circular buffer" << std::endl;
+   } else {
+      std::cout << "Finished iterator" << std::endl;
+   }
 
-    return 0;
+   return 0;
 }

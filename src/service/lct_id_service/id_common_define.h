@@ -32,24 +32,24 @@ static constexpr const char* const UNINITIALIZED_IP       = "";
 
 enum class ESeedType:int8_t
 {
-    SEED_TYPE_UNIQUE          = 1,
-    SEED_TYPE_DAY_SWITCH      = 2,
-    SEED_TYPE_DATE_SWITCH     = 3,
-    SEED_TYPE_MONTH_SWITCH    = 4,
+   SEED_TYPE_UNIQUE          = 1,
+   SEED_TYPE_DAY_SWITCH      = 2,
+   SEED_TYPE_DATE_SWITCH     = 3,
+   SEED_TYPE_MONTH_SWITCH    = 4,
 };
 
 struct CEngineInfo final
 {
-    CEngineInfo(){}
-    ~CEngineInfo(){}
-    int32_t                 Step              = 1;
-    int64_t                 PreallocSize      = 100;
-    int64_t                 Max               = std::numeric_limits<int64_t>::max();
-    int64_t                 PreallocValve     = 0;
-    std::atomic<int64_t>    CurrentId         = {0};
-    std::string             DayStamp;
+   CEngineInfo(){}
+   ~CEngineInfo(){}
+   int32_t                 Step              = 1;
+   int64_t                 PreallocSize      = 100;
+   int64_t                 Max               = std::numeric_limits<int64_t>::max();
+   int64_t                 PreallocValve     = 0;
+   std::atomic<int64_t>    CurrentId         = {0};
+   std::string             DayStamp;
 
-    DEFAULT_COPY_MOVE_AND_ASSIGN(CEngineInfo);
+   DEFAULT_COPY_MOVE_AND_ASSIGN(CEngineInfo);
 };
 
 #endif /* SRC_SERVICE_LCT_ID_SERVICE_ID_COMMON_DEFINE_H_ */

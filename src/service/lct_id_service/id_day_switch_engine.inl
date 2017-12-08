@@ -11,32 +11,32 @@
 
 inline int32_t CSidDaySwitchEngine::step() const
 {
-    return m_step;
+   return m_step;
 }
 
 inline int64_t CSidDaySwitchEngine::preallocSize() const
 {
-    return m_preallocSize;
+   return m_preallocSize;
 }
 
 inline int64_t CSidDaySwitchEngine::max() const
 {
-    return m_max;
+   return m_max;
 }
 
 inline int64_t CSidDaySwitchEngine::preallocValve() const
 {
-    return m_preallocValve;
+   return m_preallocValve;
 }
 
 inline int64_t CSidDaySwitchEngine::currentId() const
 {
-    return m_currentId;
+   return m_currentId;
 }
 
 inline int64_t CSidDaySwitchEngine::dayStamp() const
 {
-    return m_dayStamp;
+   return m_dayStamp;
 }
 
 #endif /* SRC_SERVICE_LCT_ID_SERVICE_ID_DAY_SWITCH_ENGINE_INL_ */

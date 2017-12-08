@@ -18,14 +18,14 @@
 
 class CSidServiceImpl final: public LctServiceLctUniqueId::Service
 {
-    GRpcStatus LoadSeed(GRpcServerContext* context, const CSidDummyReq* request, CSidDummyResp* response) override;
-    GRpcStatus FetchId(GRpcServerContext* context, const LctCSidRequest* request, LctCSidResponse* response) override;
+   GRpcStatus LoadSeed(GRpcServerContext* context, const CSidDummyReq* request, CSidDummyResp* response) override;
+   GRpcStatus FetchId(GRpcServerContext* context, const LctCSidRequest* request, LctCSidResponse* response) override;
 };
 
 class CSidService final:public CLctGRpcService<CSidServiceImpl>{
 public:
-    CSidService(const int32_t port, const std::string& ip);
-    ~CSidService();
+   CSidService(const int32_t port, const std::string& ip);
+   ~CSidService();
 };
 
 typedef std::shared_ptr<CSidService> CSidServiceShp;

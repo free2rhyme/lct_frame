@@ -17,32 +17,32 @@ template <typename... CIdEngineType>
 class CSidManager final: public CLctSingleton<CSidManager<CIdEngineType...>>
 {
 public:
-    LCT_ERR_CODE init();
+   LCT_ERR_CODE init();
 
-    template <typename CIdType>
-    LCT_ERR_CODE fetchId(const LCT_SEED_ID_TYPE& seedId, CIdType& id);
-
-private:
-    friend class CLctSingleton<CSidManager<CIdEngineType...>>;
-
-    CSidManager();
-    ~CSidManager();
+   template <typename CIdType>
+   LCT_ERR_CODE fetchId(const LCT_SEED_ID_TYPE& seedId, CIdType& id);
 
 private:
-    template <typename CEngineClass>
-    LCT_ERR_CODE appendEngine(const CEngineClass& idEngine);
+   friend class CLctSingleton<CSidManager<CIdEngineType...>>;
+
+   CSidManager();
+   ~CSidManager();
 
 private:
-    template<size_t I = 0, class CIdType, class ...CIdEnginesType>
-    auto fetchId(const LCT_SEED_ID_TYPE seedId, CIdType& id, std::tuple<CIdEnginesType...>& engineTuple)->typename std::enable_if<I == sizeof...(CIdEnginesType), LCT_ERR_CODE>::type;
-
-    template<size_t I = 0, class CIdType, class ...CIdEnginesType>
-    auto fetchId(const LCT_SEED_ID_TYPE seedId, CIdType& id, std::tuple<CIdEnginesType...>& engineTuple)->typename std::enable_if<I < sizeof...(CIdEnginesType), LCT_ERR_CODE>::type;
+   template <typename CEngineClass>
+   LCT_ERR_CODE appendEngine(const CEngineClass& idEngine);
 
 private:
-    typedef typename std::tuple<std::map<LCT_SEED_ID_TYPE, std::shared_ptr<CIdEngineType>>...> CLctTupleContainer;
+   template<size_t I = 0, class CIdType, class ...CIdEnginesType>
+   auto fetchId(const LCT_SEED_ID_TYPE seedId, CIdType& id, std::tuple<CIdEnginesType...>& engineTuple)->typename std::enable_if<I == sizeof...(CIdEnginesType), LCT_ERR_CODE>::type;
 
-    CLctTupleContainer     m_idEngineTuple;
+   template<size_t I = 0, class CIdType, class ...CIdEnginesType>
+   auto fetchId(const LCT_SEED_ID_TYPE seedId, CIdType& id, std::tuple<CIdEnginesType...>& engineTuple)->typename std::enable_if<I < sizeof...(CIdEnginesType), LCT_ERR_CODE>::type;
+
+private:
+   typedef typename std::tuple<std::map<LCT_SEED_ID_TYPE, std::shared_ptr<CIdEngineType>>...> CLctTupleContainer;
+
+   CLctTupleContainer     m_idEngineTuple;
 };
 
 #define SID_ID_MGR CSidManager<CSidDaySwitchEngine>::instance()

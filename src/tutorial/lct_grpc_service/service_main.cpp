@@ -32,43 +32,43 @@ typedef lowcost::vip::helloworld::Greeter      LctGreeter;
 
 // Logic and data behind the server's behavior.
 class LctGreeterServiceImpl final : public LctGreeter::Service {
-    Status SayHello(ServerContext* context, const LctHelloRequest* request, LctHelloReply* reply) override {
-        //std::cout << "Service: " << __PRETTY_FUNCTION__ << " is called " << std::endl;
-        std::string prefix("Hello ");
-        reply->set_message(prefix + request->name());
+   Status SayHello(ServerContext* context, const LctHelloRequest* request, LctHelloReply* reply) override {
+       //std::cout << "Service: " << __PRETTY_FUNCTION__ << " is called " << std::endl;
+      std::string prefix("Hello ");
+      reply->set_message(prefix + request->name());
 
-        LOG_DEBUG << "Server: " << LctCurrentDateTime()<< " " <<  std::this_thread::get_id() << " receive a rpc request and going to take a nap ";
-        std::this_thread::sleep_for(std::chrono::seconds(4));
-        LOG_DEBUG << "Server: " << LctCurrentDateTime()<< " " << std::this_thread::get_id() << " receive a rpc request and waken up ";
+      LOG_DEBUG << "Server: " << LctCurrentDateTime()<< " " <<  std::this_thread::get_id() << " receive a rpc request and going to take a nap ";
+      std::this_thread::sleep_for(std::chrono::seconds(4));
+      LOG_DEBUG << "Server: " << LctCurrentDateTime()<< " " << std::this_thread::get_id() << " receive a rpc request and waken up ";
 
 
-        return Status::OK;
-    }
+      return Status::OK;
+   }
 };
 
 class LctGreeterService final:public CLctGRpcService<LctGreeterServiceImpl>{
 public:
-    LctGreeterService(const uint16_t port, const std::string& ip):CLctGRpcService<LctGreeterServiceImpl>(port, ip){
-    }
-    virtual ~LctGreeterService(){
-    }
+   LctGreeterService(const uint16_t port, const std::string& ip):CLctGRpcService<LctGreeterServiceImpl>(port, ip){
+   }
+   virtual ~LctGreeterService(){
+   }
 };
 
 
 int main(int argc, char* argv[]){
-    std::cout << std::numeric_limits<uint16_t>::max() << std::endl;
-    uint16_t servicePort = 50051;
-    if(argc > 1){
-        servicePort = (uint16_t)std::stoi(argv[1]);
-    }
-    const std::string serviceIp        = "0.0.0.0";
-    LctGreeterService instance(servicePort, serviceIp);
-    instance.init();
+   std::cout << std::numeric_limits<uint16_t>::max() << std::endl;
+   uint16_t servicePort = 50051;
+   if(argc > 1){
+      servicePort = (uint16_t)std::stoi(argv[1]);
+   }
+   const std::string serviceIp        = "0.0.0.0";
+   LctGreeterService instance(servicePort, serviceIp);
+   instance.init();
 
-    std::cout << "Server is going to listen on:" << serviceIp << ":" << servicePort << std::endl;
-    instance.serve();
+   std::cout << "Server is going to listen on:" << serviceIp << ":" << servicePort << std::endl;
+   instance.serve();
 
-    return 0;
+   return 0;
 }
 
 

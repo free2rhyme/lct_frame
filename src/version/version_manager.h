@@ -14,45 +14,45 @@
 
 class CVersionParser final
 {
-    struct CVersionInfo
-    {
-        CVersionInfo()
-        {
-        }
+   struct CVersionInfo
+   {
+      CVersionInfo()
+      {
+      }
 
-        CVersionInfo(const std::string& k, const int16_t v):
-            Value(v),
-            Key(k)
-        {
-        }
-        int16_t      Value  = 0;
-        std::string  Key;
-    };
+      CVersionInfo(const std::string& k, const int16_t v):
+          Value(v),
+          Key(k)
+      {
+      }
+      int16_t      Value  = 0;
+      std::string  Key;
+   };
 
-    static constexpr const char* const DEFAULT_VERSION_FILE = "./common/version.h";
+   static constexpr const char* const DEFAULT_VERSION_FILE = "./common/version.h";
 
 public:
-    bool init(const std::string& versionFile = DEFAULT_VERSION_FILE);
-    bool parse();
+   bool init(const std::string& versionFile = DEFAULT_VERSION_FILE);
+   bool parse();
 
-    bool autoVersion();
-    bool forceVersion(const std::string& vs);
+   bool autoVersion();
+   bool forceVersion(const std::string& vs);
 
-    bool version() const;
+   bool version() const;
 
-    static CVersionParser* instance();
+   static CVersionParser* instance();
 private:
-    bool persist() const;
+   bool persist() const;
 
 
-    CVersionParser();
-    ~CVersionParser();
+   CVersionParser();
+   ~CVersionParser();
 
 private:
-    typedef std::vector<CVersionInfo> CVersionMapType;
+   typedef std::vector<CVersionInfo> CVersionMapType;
 
-    std::string     m_versionFile;
-    CVersionMapType m_versionMap;
+   std::string     m_versionFile;
+   CVersionMapType m_versionMap;
 };
 
 #define VERSION_MGR CVersionParser::instance()

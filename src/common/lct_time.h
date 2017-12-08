@@ -3,7 +3,7 @@
  * @file        lct_time.h
  * @version     1.0
  * @date        Sep 24, 2017 11:22:08 AM
- * @author       wlc2rhyme@gmail.com
+ * @author      wlc2rhyme@gmail.com
  * @brief       TODO
  *********************************************************************/
 #ifndef SRC_COMMON_LCT_TIME_H_
